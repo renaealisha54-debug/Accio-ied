@@ -1,0 +1,10 @@
+
+
+let timeout;
+editor.addEventListener('input', () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        localStorage.setItem(STORAGE_KEY, editor.value);
+        updateStorageUsage();
+    }, 500);
+});
