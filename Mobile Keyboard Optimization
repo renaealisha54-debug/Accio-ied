@@ -1,0 +1,9 @@
+
+
+<textarea 
+    id="code-editor" 
+    spellcheck="false" 
+    autocorrect="off" 
+    autocapitalize="off" 
+    autocomplete="off">
+</textarea>
