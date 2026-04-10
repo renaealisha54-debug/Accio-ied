@@ -1,0 +1,43 @@
+
+
+let activeWorker = null;
+
+function runCodeSafely() {
+    const code = document.getElementById('code-editor').value;
+    TerminalEngine.clear();
+    TerminalEngine.log("Starting sandbox...", "info");
+
+    // Kill any existing worker before starting a new one
+    if (activeWorker) activeWorker.terminate();
+
+    // Create worker from a Blob so it stays "Offline/Local" without a separate file
+    const blob = new Blob([`
+        self.onmessage = function(e) {
+            try {
+                new Function(e.data)();
+                self.postMessage({type: 'success', msg: 'Process completed.'});
+            } catch(err) {
+                self.postMessage({type: 'error', msg: err.message});
+            }
+        }
+    `], { type: 'application/javascript' });
+
+    activeWorker = new Worker(URL.createObjectURL(blob));
+
+    // 1. Handle results from the worker
+    activeWorker.onmessage = function(e) {
+        TerminalEngine.log(e.data.msg, e.data.type);
+        clearTimeout(killTimer);
+    };
+
+    // 2. The "Kill Switch" - prevents infinite loops
+    const killTimer = setTimeout(() => {
+        if (activeWorker) {
+            activeWorker.terminate();
+            activeWorker = null;
+            TerminalEngine.log("Execution Timeout: Code was killed to prevent freeze.", "error");
+        }
+    }, 5000); // 5 second limit
+
+    activeWorker.postMessage(code);
+}
