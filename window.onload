@@ -1,9 +1,0 @@
-window.onload = () => {
-    // Existing load logic...
-    const savedCode = ProjectManager.load();
-    if (savedCode) document.getElementById('code-editor').value = savedCode;
-    
-    // New Initializations
-    KeyboardBridge.init(); // Injects the symbol bar
-    ProjectManager.updateStorageLabel();
-};

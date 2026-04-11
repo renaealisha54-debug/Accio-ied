@@ -1,18 +1,23 @@
 let debounceTimeout;
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     const editor = document.getElementById('code-editor');
-    editor.value = ProjectManager.load();
-    ProjectManager.updateStorageLabel();
+    if (editor) {
+        const saved = ProjectManager.load();
+        if (saved) editor.value = saved;
+        if (typeof ProjectManager.updateStorageLabel === 'function') {
+            ProjectManager.updateStorageLabel();
+        }
 
-    // Auto-save with debounce for performance
-    editor.addEventListener('input', () => {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(() => {
-            ProjectManager.save(editor.value);
-        }, 500);
-    });
-};
+        // Auto-save with debounce for performance
+        editor.addEventListener('input', () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                ProjectManager.save(editor.value);
+            }, 500);
+        });
+    }
+});
 
 function handleAction(action) {
     const editor = document.getElementById('code-editor');

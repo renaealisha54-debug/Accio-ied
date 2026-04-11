@@ -1,7 +1,0 @@
-
-
-├── Accio_IDE.html       # Monolithic App File (HTML/CSS/JS)
-├── Internal_Logic/
-│   ├── Editor_Engine    # Textarea-based input with auto-save
-│   ├── Terminal_System  # Console log redirection and status reporting
-│   └── Build_Manager    # Local compilation simulation logic

@@ -1,0 +1,54 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm install --silent
+      
+    - name: Validate JS syntax
+      run: |
+        echo "=== Validating JavaScript files ==="
+        for f in *.js; do
+          if [ -f "$f" ]; then
+            if node --check "$f" 2>/dev/null; then
+              echo "✓ $f: OK"
+            else
+              echo "✗ $f: SYNTAX ERROR"
+              exit 1
+            fi
+          fi
+        done
+        
+    - name: Check HTML structure
+      run: |
+        if [ -f index.html ]; then
+          echo "✓ index.html: Found"
+        else
+          echo "✗ index.html: Missing"
+          exit 1
+        fi
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: accio-source
+        path: .
+        retention-days: 7

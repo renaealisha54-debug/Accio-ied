@@ -1,0 +1,13 @@
+{
+  "name": "accio-ied",
+  "version": "1.0.0",
+  "description": "Web-based IDE for Android development",
+  "main": "main.js",
+  "scripts": {
+    "lint": "eslint *.js",
+    "test": "node --check main.js"
+  },
+  "keywords": ["ide", "android", "development"],
+  "author": "",
+  "license": "MIT"
+}
