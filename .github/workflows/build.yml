@@ -20,8 +20,8 @@ jobs:
         node-version: '20'
         cache: 'npm'
         
-    - name: Install dependencies
-      run: npm install --silent
+    - name: Create package-lock.json
+      run: npm install --package-lock-only
       
     - name: Validate JS syntax
       run: |
