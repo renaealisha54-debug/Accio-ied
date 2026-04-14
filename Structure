@@ -1,0 +1,7 @@
+Accio-ied/
+├── .github/
+│   └── ISSUE_TEMPLATE.md  <-- Add this for bug reports
+├── .gitignore             <-- Add this to keep the repo clean
+├── LICENSE                <-- Add this for legal clarity
+├── README.md              (Update with Quick Start & Roadmap)
+├── ... (your existing files)
