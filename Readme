@@ -1,0 +1,13 @@
+## 🚀 Quick Start
+1. Clone the repo: `git clone ...`
+2. Install dependencies: `npm install`
+3. Launch: `npm start`
+
+## 📱 Mobile Optimization
+- **OLED Mode:** Enabled by default to save battery on AMOLED screens.
+- **Webview Fixes:** Includes specific patches for Chrome-based mobile browsers.
+
+## 🛠️ Roadmap
+- [ ] Add support for Python (via Pyodide)
+- [ ] Git integration (isomorphic-git)
+- [ ] PWA installation support
